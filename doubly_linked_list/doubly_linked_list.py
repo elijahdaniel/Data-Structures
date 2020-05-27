@@ -38,6 +38,34 @@ class ListNode:
             self.next.prev = self.prev
 
 
+my_node = ListNode(12)
+my_node.insert_after(25)
+my_node.insert_after(100)
+my_node.next.insert_after(99)
+
+
+def iterate_list(node):
+    while node is not None:
+        print(node.value)
+        node = node.next
+
+
+# iterate_list(my_node)
+# my_node = ListNode(12)
+# ||
+# my_node.next = ListNode(100)
+# ||
+# ListNode(99)
+# ||
+# ListNode(25)
+
+# not so efficient: finding a value
+
+# efficient: removing/adding from beginning and end
+
+# delete
+# update
+
 """Our doubly-linked list class. It holds references to
 the list's head and tail nodes."""
 
@@ -51,6 +79,34 @@ class DoublyLinkedList:
 
     def __len__(self):
         return self.length
+
+    # Added during stacks and queues GP
+    def find_middle(self):
+        middle = self.head
+        end = self.head
+
+        # look forward two steps
+        while end.next != None and end.next.next != None:
+            # then take two steps forward
+            end = end.next.next
+            middle = middle.next
+
+        return middle
+
+    # head should now be tail
+    # tail should now be head
+    # no recursion, no other data structures
+    def reverse_list(self):
+        pass
+
+    def iterate_nodes(self):
+        total = 0
+        node = self.head
+        while node is not None:
+            total += 1
+            node = node.next
+
+        return total
 
     """Wraps the given value in a ListNode and inserts it
     as the new head of the list. Don't forget to handle
@@ -71,7 +127,7 @@ class DoublyLinkedList:
             # tells link list, this is the new head
             self.head = new_node
 
-        # handle if a list has no head
+        # handle if list has no head
         else:
             # set empty self.head + self.tail (no head/no tail) to new_node
             self.head = new_node
@@ -186,7 +242,7 @@ class DoublyLinkedList:
 
         # if list is empty
         if not self.head:
-            print('List is empty')
+            print("List is empty")
             return
 
         # subtract from the list's length (moved to after checking if list is empty)
@@ -230,7 +286,18 @@ class DoublyLinkedList:
             if current_node.value > highest_value:
                 highest_value = current_node.value
 
-             # bump along to next node
+            # bump along to next node
             current_node = current_node.next
 
         return highest_value
+
+
+# dll = DoublyLinkedList()
+# dll.add_to_tail(1)
+# dll.add_to_tail(2)
+# dll.add_to_tail(3)
+# dll.add_to_tail(4)
+# dll.add_to_tail(5)
+
+# middle = dll.find_middle()
+# print(middle.value)
